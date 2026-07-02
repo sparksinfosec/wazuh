@@ -18,7 +18,7 @@
 # Script in its current state is pretty safe but what if one of the function fails it would still install and enable without any check
 # rsyslog.conf (make sure to disable rsyslog 
 # Restart the service 
-RHEL_VERSION=$(cat /etc/redhat-release | grep -oP 'release \K[\d\.]+' | cut -d'.' -f1)
+RHEL_VERSION=$(grep -oP 'release \K[\d\.]+' /etc/redhat-release | cut -d'.' -f1)
 # Can look at useless form of cat and just update with grep the specific files directly then cut should work the same
 DC=$1 
 # Write a check for the input and DC env to use
@@ -64,7 +64,7 @@ remove_wazuh_agent(){
 	fi 
 }
 wazuh_agent_install(){
-    echo "Installing Agent 4.12" # Specific to this install
+    echo "Installing Wazuh Agent"
     rpm -ivh ./wazuh-agent.rpm 
 }
 password_files(){
